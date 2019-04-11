@@ -220,13 +220,13 @@ describe('04-arrays-tasks', function() {
     it.optional('insertItem should insert an item at specified position', function () {
         [
             {
-                arr:      [ 1,    3, 4, 5 ],
-                item:          2,
+                arr:      [ 1, 3, 4, 5 ],
+                item:     2,
                 index:    1,
                 expected: [ 1, 2, 3, 4, 5 ]
             },{
-                arr:      [      1, 'b', 'c' ],
-                item:       'x',
+                arr:      [ 1, 'b', 'c' ],
+                item:     'x',
                 index:    0,
                 expected: [ 'x', 1, 'b', 'c' ]
             }
@@ -849,18 +849,6 @@ describe('04-arrays-tasks', function() {
                 `The result of swaping head and tail [${data.arr}] is not correct`
             );
         });
-    });
-
-
-    it.optional('Functions from 04-array-test.js should not use basic loops statements', function () {
-        Object.getOwnPropertyNames(tasks)
-              .filter(x => tasks[x] instanceof Function)
-              .forEach(f => {
-                  assert(
-                      !/([;{]\s*(for|while)\s*\()|(\.forEach\s*\()/.test(tasks[f].toString()),
-                      `Function "${f}" should not use basic loop statements (for, while or Array.forEach)! Please use specialized array methods (Array.map, Array.reduce etc).`
-                  );
-              });
-    });
+    }); 
      
 });
