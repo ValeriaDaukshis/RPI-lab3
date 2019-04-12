@@ -23,7 +23,17 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    let obj = new rect(width,height); 
+	function rect(width,height)
+	{
+		this.width = width;
+		this.height = height;
+		this.getArea= function(){
+			return this.width * this.height;
+		}
+	}
+	
+	return obj; 
 }
 
 
@@ -38,7 +48,8 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+     // JSON.stringify преобразует передаваемый аргумент в строку
+    return JSON.stringify(obj);
 }
 
 
@@ -54,7 +65,9 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    // Первый параметр - объект, которому устанавливается прототип
+    // Второй параметр - новый прототип объекта
+    return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
 
