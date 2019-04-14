@@ -175,7 +175,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-     
+     return str.split(';');
 }
 
 /**
@@ -202,17 +202,14 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-     var i = 0;
-     var rect = '┌'+'─'.repeat(width-2) +'┐'+ '\n';
-	 while(  i < (height - 2)) 
-     {
-         rect += '|' + ' '.repeat(width - 2) + '|\n';
-		 ++i;
-     }
-		
-	rect =rect + '└'+'─'.repeat(width-2) +'┘'+ '\n';
-	 
-	 return rect;
+    const middleSidePart = repeatString('─', width - 2);
+    const heightBlock = "│" + repeatString(' ', width - 2) + "│\n";
+
+    let rectangle = "┌" + middleSidePart + "┐\n";
+    rectangle += repeatString(heightBlock, height - 2);
+    rectangle += "└" + middleSidePart + "┘\n";
+
+    return rectangle;
 	
 }
 
@@ -262,7 +259,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    if (typeof(value) === 'string')
+    if (typeof value === 'string' || value instanceof String)
 		return true;
 	return false;
 }
