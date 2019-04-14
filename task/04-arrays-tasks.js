@@ -333,7 +333,15 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   throw new Error('Not implemented');
+   let newarr = [];
+   let i = 0;
+   while (i < arr.length)
+   {
+	   for (let j = 0 ; j < i+1 ; j++)
+		   newarr.push(arr[i]);
+	   i++;
+   }
+   return newarr;
 }
 
 
