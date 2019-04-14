@@ -366,7 +366,26 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+	if (str.length % 2 != 0)
+		return false;
+	let arr = [];
+    let map = new Map(); 
+	map.set('[', ']');    
+	map.set('(', ')');    
+	map.set('{', '}');    
+	map.set('<', '>');
+	
+	
+	for (let i = 0 ; i < str.length; i++)
+	{
+		if(map.get(str[i]) !== undefined )
+			arr.push(str[i]);
+		else if (map.get(arr[arr.length-1]) == str[i]) 
+            arr.splice(arr.length-1,1);  
+	}
+	if (arr.length == 0)
+		return true;
+	return false;
 }
 
 
@@ -443,7 +462,23 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-	throw new Error('Not implemented'); 
+	 pathes.sort();
+
+    let count = -1;
+    for (let i = 0; i < pathes[0].length; i++) {
+        if (pathes[0][i] != pathes[pathes.length - 1][i]) {
+            break;
+        }
+
+        if (pathes[0][i] == '/') {
+            count = i;
+        }
+    }
+	if (count == -1)
+		return '';
+
+// slice возвр копию 
+    return pathes[0].slice(0, count + 1);
 }
 
 
