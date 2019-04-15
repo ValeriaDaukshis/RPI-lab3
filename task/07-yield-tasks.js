@@ -65,7 +65,7 @@ function* getFibonacciSequence() {
 	 let sum = first + secound;
 	 yield first;
 	 yield secound;
-	 while(sum <= 39088169)
+	 while(true)
 	 {
 		 sum = first + secound;
 		 yield sum;
@@ -106,7 +106,18 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let arr = [root];    
+	for (let i = 0; i < arr.length; i++)
+	{
+		yield arr[i];
+		if ('children' in arr[i])
+		{
+			for (let j = 0; j < arr[i].children.length; j++)
+			{
+				arr.splice(i + 1 + j, 0, arr[i].children[j]);
+			}
+		}
+	}
 }
 
 
@@ -132,7 +143,18 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let arr = [root];
+	for (let i = 0; i < arr.length; i++)
+	{
+		yield arr[i];
+		if ('children' in arr[i])
+		{
+			for (let j = 0; j < arr[i].children.length; j++)
+			{
+				arr.push(arr[i].children[j]);
+			}
+		}
+	}
 }
 
 
@@ -150,16 +172,7 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    let iterator1 = source1;
-	let iterator2 = source2;
-	while(!iterator1.next().done && !iterator2.next().done)
-	{
-		if (iterator1.next().value < iterator2.next().value)
-			yield iterator1.next().value;
-		else
-			yield iterator2.next().value;
-
-	}
+    throw new Error('Not implemented'); 
 }
 
 
