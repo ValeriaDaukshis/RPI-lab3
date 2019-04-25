@@ -109,8 +109,8 @@ function* depthTraversalTree(root) {
     let arr = [root];    
 	for (let i = 0; i < arr.length; i++)
 	{
-		yield arr[i];
-		if ('children' in arr[i])
+		yield arr[i]; 
+		if (arr[i].children !== undefined)
 		{
 			for (let j = 0; j < arr[i].children.length; j++)
 			{
@@ -147,7 +147,7 @@ function* breadthTraversalTree(root) {
 	for (let i = 0; i < arr.length; i++)
 	{
 		yield arr[i];
-		if ('children' in arr[i])
+		if (arr[i].children !== undefined)
 		{
 			for (let j = 0; j < arr[i].children.length; j++)
 			{

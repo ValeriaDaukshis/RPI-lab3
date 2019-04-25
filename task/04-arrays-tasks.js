@@ -37,13 +37,11 @@ function findElement(arr, value) {
  *    2 => [ 1, 3 ] 
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(len) {
-   let arr = [len];
-   let elem = 1;
+function generateOdds(len) { 
+   let arr = [len]; 
    for(let i = 0 ; i < len ; ++i) 
    {
-	   	arr[i] = elem;
-		elem +=2; 
+	   	arr[i] = i*2+1; 
    }
    return arr;
 }
@@ -77,16 +75,8 @@ function doubleArray(arr) {
  *    [] => [] 
  */
 function getArrayOfPositives(arr) { 
-	let newarr = [];
-	let j = 0;
-	while(j < arr.length)
-	{
-		if (arr[j] > 0) 
-			newarr.push(arr[j]);
-		
-		++j;
-	} 
-	return newarr;	
+	//filter- create a new array with elem > 0 elements
+	return arr.filter(elem => elem > 0)
 	
 }
 
@@ -102,13 +92,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) { 
-	if (arr.length == 0)
-		return [];
-	let newarr = [];
-	for (let i = 0 ; i < arr.length; i++) 
-		if (typeof arr[i] === 'string') 
-			newarr.push(arr[i]);   
-	return newarr;	
+    return arr.filter(elem => typeof elem === 'string' || elem instanceof String); 
 }
 
 /**
@@ -124,24 +108,11 @@ function getArrayOfStrings(arr) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */ 
-function removeFalsyValues(arr) { 
-	var newarr = []; 
-	for (var i = 0 ; i < arr.length ; ++i)
-		if (isFalsy(arr[i])) 
-			newarr.push(arr[i]);  
-		
-	return newarr;
-	
+function removeFalsyValues(arr) {  
+	return arr.filter(elem => elem);
 }
 
-function isFalsy(value)
-{
-	if ( value === false || value === 0 || value ===null || value === ""  || value === undefined ) 
-           return false; 
-    else if (isNaN(value) && !(typeof value === 'string') )
-         return false; 
-	return true;
-} 
+ 
 
 /**
  * Returns the array of useprcase strings from the specified array
@@ -153,10 +124,9 @@ function isFalsy(value)
  *    [ 'permanent-internship', 'glutinous-shriek', 'multiplicative-elevation' ] => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ]
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(arr) { 
-	for (let i = 0 ; i < arr.length; ++i)
-		arr[i] = arr[i].toUpperCase();
-	return arr;
+function getUpperCaseStrings(arr) {  
+// map create a new arr with old elements.toUpperCase()
+	return arr.map(elem => elem.toUpperCase());
 }
 
 
@@ -170,11 +140,8 @@ function getUpperCaseStrings(arr) {
  *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
-function getStringsLength(arr) {
-   var newarr = [arr.length]; 
-   for (let i = 0 ; i < arr.length; ++i)
-	   newarr[i] = arr[i].length;
-   return newarr;
+function getStringsLength(arr) { 
+   return arr.map(elem => elem.length);
 }
 
 /**
@@ -202,10 +169,9 @@ function insertItem(arr, item, index) {
  *    [ 1, 3, 4, 5 ], 2  => [ 1, 2 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
-function getHead(arr, n) { 
-    for (let i = n ; i < arr.length; ++i)
-		 delete arr[i]; 
-	return arr;
+function getHead(arr, n) {  
+// return arr with deleted elements
+	return arr.splice(0 , n);
     
 }
 
@@ -260,13 +226,8 @@ function toCsvText(arr) {
  *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
-function toArrayOfSquares(arr) { 
-    for (let i = 0 ; i < arr.length; ++i)
-		  arr[i] *= arr[i];
-	
-	return arr;
-		
-	
+function toArrayOfSquares(arr) {  
+	return arr.map(elem => elem*elem); 
 }
 
 
@@ -285,14 +246,8 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-    let sum = 0;  
-    for (let i = 0 ; i < arr.length; ++i)
-	{
-		sum += arr[i]; 
-		arr[i] = sum;
-	} 
-	return arr;
-   
+	let sum = 0;  
+	return arr.map(elem => sum+=elem);  
 }
 
 /**
@@ -307,14 +262,8 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) { 
-	if (arr.length == 0)
-		return []; 
-	let newarr = []; 
-    for (let i = 0 ; i < arr.length; ++i)
-		if ((i + 1) % 2 == 0)  
-			 newarr.push(arr[i]); 
-		 
-	return newarr;
+    let index=1;
+	return arr.filter((elem, index) => index % 2); 
 }
 
 
@@ -359,14 +308,8 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) { 
-    let newarr=[];
-    for (let i = arr.length -1 ; i >= 0; --i)
-		if(newarr.length < 3) 
-			newarr.push(arr[i]);
-		else
-			break;
-		
-	return newarr;
+    arr.sort((a,b)=> b-a);
+	return arr.splice(0,3); 
 }
  
  
@@ -384,11 +327,8 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-    let count = 0; 
-    for (let i = 0 ; i < arr.length; ++i)
-		if ((typeof arr[i] == 'number')&&(arr[i] > 0))
-			++count;
-	return count;
+	return arr.filter(elem => (typeof elem == 'number')&&(elem > 0) ).length;
+     
 }
  
 /** 
@@ -405,16 +345,8 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-     arr.sort(function(a,b)
-	{
-		if (getNumber(a) > getNumber(b))
-			return 1;
-		if (getNumber(a) < getNumber(b))
-			return -1;
-		return 0;
-		
-	});
-	return arr;
+     return arr.sort( (a,b) => getNumber(a)-getNumber(b));
+	 
 }
 
 function getNumber(value)
@@ -446,12 +378,9 @@ function getNumber(value)
  *   [ -1, 1, -1, 1 ]      => 0
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
-function getItemsSum(arr) {
-	let sum = 0; 
-    for (let i = 0 ; i < arr.length; ++i)
-		sum += arr[i];
-		
-	return sum;
+function getItemsSum(arr) { 
+// 0-initial value
+	return arr.reduce((elem, sum) => sum + elem,0); 
 }
  
 /** 
@@ -467,23 +396,8 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   let count = 0;
-   for (let i = 0 ; i < arr.length ; ++i)
-	   if (!isFalsy(arr[i]))
-		   count++;  
-	   
-	return count;
-}
-
-function isFalsy(value)
-{
-	if ( value === false || value === 0 || value ===null || value === ""  || value === undefined ) 
-           return false; 
-    else if (isNaN(value) && !(typeof value === 'string') )
-         return false; 
-	return true;
+   return arr.filter(elem => !elem).length 
 } 
-
 /**
  * Returns a number of all occurences of the specified item in an array  
  * 
@@ -499,12 +413,7 @@ function isFalsy(value)
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-    let count = 0; 
-    for (let i = 0 ; i < arr.length; ++i)
-		if (arr[i] === item)
-			++count;
-		
-	return count;
+	return arr.filter(elem => elem === item).length; 
 }
 
 /**
@@ -519,7 +428,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   return arr.join();
+   return arr.toString();
 }
 
 
@@ -553,9 +462,7 @@ function sortCitiesArray(arr) {
 		if (a.country > b.country) return 1;
 		if (a.country < b.country) return -1;
 		if (a.country == b.country)  
-			return a.city.localeCompare(b.city); 
-		     
-		
+			return a.city.localeCompare(b.city);  
 	}
      return arr.sort(compare); 
 	
@@ -634,11 +541,8 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) { 
-    let newarr = [];
-	for (let i = 0 ; i < arr.length; i++)
-		if (newarr.indexOf(arr[i]) == -1)
-			newarr.push(arr[i]);
-   return newarr;
+    return arr.filter((elem, index) => arr.indexOf(elem) === index);
+     
 }
 
 /**

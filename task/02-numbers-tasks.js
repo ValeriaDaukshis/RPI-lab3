@@ -183,11 +183,8 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(num, pow) {
-     var i;
-	 var newpow = 1;
-	 for (i = 0 ; i < pow ; ++i)
-		 newpow *=10;
+function roundToPowerOfTen(num, pow) { 
+	 let newpow = Math.pow(10, pow); 
 	 return Math.round(num / newpow) * newpow;
 }
 
@@ -212,9 +209,8 @@ function isPrime(n) {
 	 if (n == 2 || n == 3)
 		return true;
      if(n % 2 == 0 || n == 1)
-		 return false;
-	 var i;
-	 for (i = 3 ; i < n / 2 ; ++i)
+		 return false; 
+	 for (let i = 3 ; i < n / 2 ; ++i)
 		 if (n % i == 0)
 			 return false; 
 		 

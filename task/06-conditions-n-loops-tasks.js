@@ -243,11 +243,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-	let newstr = '';
-    for (let i = str.length - 1 ; i >= 0 ; i--)
-		newstr += str[i];
-	
-	return newstr;
+	return str.split('').reverse().join('');
 }
 
 
@@ -263,13 +259,8 @@ function reverseString(str) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(num) {
-	let str = num.toString();
-    let newstr = '';
-    for (let i = str.length - 1 ; i >= 0 ; i--)
-		newstr += str[i];
-	
-	return newstr;
+function reverseInteger(num) { 
+	return parseInt(reverseString(num.toString()));
 }
 
 
@@ -329,8 +320,7 @@ function isCreditCardNumber(ccn) {
  */
 function getDigitalRoot(num) {
      let str = num.toString();
-	 let sum = 0;
-	 let bool = false;
+	 let sum = 0; 
 	 while (str.length > 1)
 	 {
 		 sum = 0;
@@ -381,7 +371,8 @@ function isBracketsBalanced(str) {
 		if(map.get(str[i]) !== undefined )
 			arr.push(str[i]);
 		else if (map.get(arr[arr.length-1]) == str[i]) 
-            arr.splice(arr.length-1,1);  
+            arr.splice(arr.length-1,1); 
+		// array.splice(start, deleteCount[, item1[, item2[, ...]]])
 	}
 	if (arr.length == 0)
 		return true;
